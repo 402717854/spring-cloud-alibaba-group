@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "nacos-provider", fallback = EchoServiceFallback.class)
+@FeignClient(name = "nacos-provider")
 public interface EchoService {
 
     @GetMapping("/echo/{str}")

@@ -10,6 +10,7 @@
     <modules>
         <module>rocketmq-stream-demo</module>
         <module>springcloud-alibaba-nacos</module>
+        <module>alibaba-sentinel-group</module>
     </modules>
 
     <properties>
