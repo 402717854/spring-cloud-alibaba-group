@@ -33,6 +33,13 @@ public class EchoController {
 
     @GetMapping("/echo/{string}")
     public String echo(@PathVariable String string) {
+        try {
+            if(string.equals("a")) {
+                Thread.sleep(5000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "hello Nacos Discovery " + string;
     }
 

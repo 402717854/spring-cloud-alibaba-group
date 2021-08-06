@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>springcloud-alibab-nacos-provider</artifactId>
+    <artifactId>springcloud-alibaba-nacos-provider</artifactId>
     <name>springcloud-alibab-nacos-provider</name>
 
     <description>Demo project for Spring Boot</description>
