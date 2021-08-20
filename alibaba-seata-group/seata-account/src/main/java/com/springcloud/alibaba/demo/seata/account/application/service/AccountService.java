@@ -8,6 +8,9 @@ import com.springcloud.alibaba.demo.seata.common.response.ObjectResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * 账户服务
+ */
 @Component
 public class AccountService {
 
