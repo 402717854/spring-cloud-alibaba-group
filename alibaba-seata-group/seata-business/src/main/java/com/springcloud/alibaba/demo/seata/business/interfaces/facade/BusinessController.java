@@ -1,6 +1,7 @@
 package com.springcloud.alibaba.demo.seata.business.interfaces.facade;
 
 import com.springcloud.alibaba.demo.seata.business.application.service.BusinessService;
+import com.springcloud.alibaba.demo.seata.business.application.service.BusinessTccService;
 import com.springcloud.alibaba.demo.seata.common.dto.BusinessDTO;
 import com.springcloud.alibaba.demo.seata.common.response.ObjectResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BusinessController {
 
     @Autowired
+    private BusinessTccService businessTccService;
+    @Autowired
     private BusinessService businessService;
 
     /**
@@ -28,8 +31,18 @@ public class BusinessController {
      * @Param:
      * @Return:
      */
-    @PostMapping("/buy")
+    @PostMapping("/tcc/buy")
     public ObjectResponse handleBusiness(@RequestBody BusinessDTO businessDTO){
+        log.info("请求参数：{}",businessDTO.toString());
+        return businessTccService.handleBusiness(businessDTO);
+    }
+    /**
+     * 模拟用户购买商品下单业务逻辑流程
+     * @Param:
+     * @Return:
+     */
+    @PostMapping("/buy")
+    public ObjectResponse handleBusiness2(@RequestBody BusinessDTO businessDTO){
         log.info("请求参数：{}",businessDTO.toString());
         return businessService.handleBusiness(businessDTO);
     }

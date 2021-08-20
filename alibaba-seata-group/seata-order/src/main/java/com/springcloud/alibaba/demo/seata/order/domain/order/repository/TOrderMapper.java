@@ -19,4 +19,10 @@ public interface TOrderMapper{
      * @Return:
      */
     void createOrder(@Param("order") TOrder order);
+
+    /**
+     * 删除订单
+     * @param orderNo
+     */
+    void deleteOrder(@Param("orderNo") String orderNo);
 }

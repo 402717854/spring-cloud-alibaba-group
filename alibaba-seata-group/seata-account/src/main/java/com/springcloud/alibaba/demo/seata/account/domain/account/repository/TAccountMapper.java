@@ -14,5 +14,8 @@ public interface TAccountMapper{
 
     int decreaseAccount(@Param("userId") String userId, @Param("amount") Double amount);
 
+    int increaseAccount(@Param("userId") String userId, @Param("amount") Double amount);
+
+
     int testGlobalLock(@Param("userId") String userId);
 }

@@ -18,4 +18,5 @@ public interface TStorageMapper{
      * @Return:
      */
     int decreaseStorage(@Param("commodityCode") String commodityCode, @Param("count") Integer count);
+    int increaseStorage(@Param("commodityCode") String commodityCode, @Param("count") Integer count);
 }

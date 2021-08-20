@@ -17,4 +17,15 @@ public interface ITOrderService{
      * 创建订单
      */
     ObjectResponse<OrderDTO> createOrder(ObjectResponse<OrderDTO> response,OrderDTO orderDTO);
+    /**
+     * 创建订单
+     */
+    Boolean createOrder(OrderDTO orderDTO);
+
+    /**
+     * 删除订单
+     * @param orderNo
+     * @return
+     */
+    void deleteOrder(String orderNo);
 }

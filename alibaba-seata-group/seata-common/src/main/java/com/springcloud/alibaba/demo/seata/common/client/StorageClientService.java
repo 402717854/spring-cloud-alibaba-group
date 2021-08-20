@@ -19,4 +19,6 @@ public interface StorageClientService {
      */
     @PostMapping("/storage/decrease")
     public ObjectResponse decreaseStorage(@RequestBody CommodityDTO commodityDTO);
+    @PostMapping("/storage/decrease/tcc")
+    public ObjectResponse decreaseStorageTCC(@RequestBody CommodityDTO commodityDTO);
 }

@@ -1,13 +1,14 @@
 package com.springcloud.alibaba.demo.seata.order.domain.order.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.springcloud.alibaba.demo.seata.common.dto.OrderDTO;
 import com.springcloud.alibaba.demo.seata.common.enums.RspStatusEnum;
 import com.springcloud.alibaba.demo.seata.common.response.ObjectResponse;
 import com.springcloud.alibaba.demo.seata.order.domain.order.entity.TOrder;
 import com.springcloud.alibaba.demo.seata.order.domain.order.repository.TOrderMapper;
 import com.springcloud.alibaba.demo.seata.order.domain.order.service.ITOrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.UUID;
  * @since 2019-01-13
  */
 @Service
+@Slf4j
 public class TOrderServiceImpl implements ITOrderService {
 
     @Resource
@@ -51,5 +53,26 @@ public class TOrderServiceImpl implements ITOrderService {
         response.setStatus(RspStatusEnum.SUCCESS.getCode());
         response.setMessage(RspStatusEnum.SUCCESS.getMessage());
         return response;
+    }
+
+    @Override
+    public Boolean createOrder(OrderDTO orderDTO) {
+        try{
+            //生成订单
+            TOrder tOrder = new TOrder();
+            BeanUtils.copyProperties(orderDTO,tOrder);
+            tOrder.setCount(orderDTO.getOrderCount());
+            tOrder.setAmount(orderDTO.getOrderAmount().doubleValue());
+            orderMapper.createOrder(tOrder);
+        }catch (Exception e){
+            log.error("创建订单失败,orderDTO:{},error:{}", JSON.toJSONString(orderDTO),e);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void deleteOrder(String orderNo) {
+        orderMapper.deleteOrder(orderNo);
     }
 }

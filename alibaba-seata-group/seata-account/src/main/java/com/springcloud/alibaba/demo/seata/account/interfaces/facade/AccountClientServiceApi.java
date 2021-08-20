@@ -19,4 +19,10 @@ public class AccountClientServiceApi implements AccountClientService {
         log.info("远程服务请求账户微服务：{}",accountDTO.toString());
         return accountService.decreaseAccount(accountDTO);
     }
+
+    @Override
+    public ObjectResponse decreaseAccountTcc(AccountDTO accountDTO) {
+        log.info("远程服务请求账户微服务：{}",accountDTO.toString());
+        return accountService.decreaseAccountTCC(accountDTO);
+    }
 }

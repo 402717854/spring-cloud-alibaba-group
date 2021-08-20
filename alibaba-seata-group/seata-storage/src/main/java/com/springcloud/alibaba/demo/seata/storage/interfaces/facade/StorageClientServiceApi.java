@@ -19,4 +19,10 @@ public class StorageClientServiceApi implements StorageClientService {
         log.info("远程服务请求库存微服务：{}",commodityDTO.toString());
         return storageService.decreaseStorage(commodityDTO);
     }
+
+    @Override
+    public ObjectResponse decreaseStorageTCC(CommodityDTO commodityDTO) {
+        log.info("远程服务请求库存微服务：{}",commodityDTO.toString());
+        return storageService.decreaseStorageTCC(commodityDTO);
+    }
 }
