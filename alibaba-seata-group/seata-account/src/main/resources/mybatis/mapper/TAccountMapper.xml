@@ -17,10 +17,10 @@
         id, user_id, amount
     </sql>
     <update id="decreaseAccount">
-      update t_account set amount = amount-${amount} where user_id = #{userId}
+      update t_account set amount = amount-#{amount} where user_id = #{userId}
     </update>
     <update id="increaseAccount">
-      update t_account set amount = amount+${amount} where user_id = #{userId}
+      update t_account set amount = amount+#{amount} where user_id = #{userId}
     </update>
     <update id="testGlobalLock">
       select * from t_account where user_id = #{userId} for update

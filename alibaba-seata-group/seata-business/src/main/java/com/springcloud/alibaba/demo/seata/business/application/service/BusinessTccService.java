@@ -26,7 +26,7 @@ public class BusinessTccService {
     @Autowired
     private OrderClientService orderClientService;
 
-    private boolean flag;
+    private boolean flag=false;
 
     /**
      * 处理业务逻辑
@@ -50,9 +50,9 @@ public class BusinessTccService {
         ObjectResponse<OrderDTO> response = orderClientService.createOrderTCC(orderDTO);
 
         //打开注释测试事务发生异常后，全局回滚功能
-//        if (!flag) {
-//            throw new RuntimeException("测试抛异常后，分布式事务回滚！");
-//        }
+        if (!flag) {
+            throw new RuntimeException("测试抛异常后，分布式事务回滚！");
+        }
 
         if (storageResponse.getStatus() != 200 || response.getStatus() != 200) {
             throw new DefaultException(RspStatusEnum.FAIL);

@@ -2,7 +2,6 @@ package com.springcloud.alibaba.demo.seata.account.domain.account.action.impl;
 
 import com.springcloud.alibaba.demo.seata.account.domain.account.action.AccountAction;
 import com.springcloud.alibaba.demo.seata.account.domain.account.repository.TAccountMapper;
-import com.springcloud.alibaba.demo.seata.common.dto.AccountDTO;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

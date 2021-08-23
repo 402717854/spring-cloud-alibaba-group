@@ -22,11 +22,11 @@
     <!--创建订单-->
     <insert id="createOrder" keyProperty="id" useGeneratedKeys="true"
             parameterType="com.springcloud.alibaba.demo.seata.order.domain.order.entity.TOrder">
-      insert into t_order values(null,#{order.orderNo},#{order.userId},#{order.commodityCode},${order.count},${order.amount})
+      insert into t_order values(null,#{order.orderNo},#{order.userId},#{order.commodityCode},#{order.count},#{order.amount})
     </insert>
 
     <delete id="deleteOrder" parameterType="java.lang.String">
-        delete from t_order where order_no=${orderNo}
+        delete from t_order where order_no=#{orderNo}
     </delete>
 
 </mapper>
