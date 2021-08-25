@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @Date Created in 2021/08/19
  */
 @Component
-public class BusinessTccService {
+public class BusinessATService {
 
     @Autowired
     private StorageClientService storageClientService;
@@ -33,26 +33,26 @@ public class BusinessTccService {
      * @Param:
      * @Return:
      */
-    @GlobalTransactional(name = "seata-tcc-transactional")
+    @GlobalTransactional(name = "seata-at-transactional",timeoutMills = 100000)
     public ObjectResponse handleBusiness(BusinessDTO businessDTO) {
         ObjectResponse<Object> objectResponse = new ObjectResponse<>();
         //1、扣减库存
         CommodityDTO commodityDTO = new CommodityDTO();
         commodityDTO.setCommodityCode(businessDTO.getCommodityCode());
         commodityDTO.setCount(businessDTO.getCount());
-        ObjectResponse storageResponse = storageClientService.decreaseStorageTCC(commodityDTO);
+        ObjectResponse storageResponse = storageClientService.decreaseStorage(commodityDTO);
         //2、创建订单
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setUserId(businessDTO.getUserId());
         orderDTO.setCommodityCode(businessDTO.getCommodityCode());
         orderDTO.setOrderCount(businessDTO.getCount());
         orderDTO.setOrderAmount(businessDTO.getAmount());
-        ObjectResponse<OrderDTO> response = orderClientService.createOrderTCC(orderDTO);
+        ObjectResponse<OrderDTO> response = orderClientService.createOrder(orderDTO);
 
         //打开注释测试事务发生异常后，全局回滚功能
-//        if (!flag) {
-//            throw new RuntimeException("测试抛异常后，分布式事务回滚！");
-//        }
+        if (!flag) {
+            throw new RuntimeException("测试抛异常后，分布式事务回滚！");
+        }
 
         if (storageResponse.getStatus() != 200 || response.getStatus() != 200) {
             throw new DefaultException(RspStatusEnum.FAIL);

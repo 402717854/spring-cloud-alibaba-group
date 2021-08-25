@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class StorageService {
+public class StorageATService {
 
     @Autowired
     private ITStorageService itStorageService;

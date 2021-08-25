@@ -16,4 +16,6 @@ public interface OrderClientService {
 
     @PostMapping("/order/tcc/create")
     ObjectResponse<OrderDTO> createOrderTCC(@RequestBody OrderDTO orderDTO);
+    @PostMapping("/order/create")
+    ObjectResponse<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO);
 }

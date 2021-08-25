@@ -6,28 +6,31 @@ import com.springcloud.alibaba.demo.seata.common.dto.OrderDTO;
 import com.springcloud.alibaba.demo.seata.common.enums.RspStatusEnum;
 import com.springcloud.alibaba.demo.seata.common.response.ObjectResponse;
 import com.springcloud.alibaba.demo.seata.order.domain.order.action.OrderAction;
+import com.springcloud.alibaba.demo.seata.order.domain.order.service.ITOrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
-public class OrderTCCService {
+public class OrderATService {
     @Autowired
-    private OrderAction orderAction;
+    private ITOrderService itOrderService;
     @Autowired
     private AccountClientService accountClientService;
 
     /**
      * 创建订单
      */
+    @GlobalTransactional
     public ObjectResponse<OrderDTO> createOrder(OrderDTO orderDTO){
         ObjectResponse<OrderDTO> response = new ObjectResponse<>();
         //扣减用户账户
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setUserId(orderDTO.getUserId());
         accountDTO.setAmount(orderDTO.getOrderAmount());
-        ObjectResponse objectResponse = accountClientService.decreaseAccountTcc(accountDTO);
+        ObjectResponse objectResponse = accountClientService.decreaseAccount(accountDTO);
         if (objectResponse.getStatus() != 200) {
             response.setStatus(RspStatusEnum.FAIL.getCode());
             response.setMessage(RspStatusEnum.FAIL.getMessage());
@@ -35,9 +38,7 @@ public class OrderTCCService {
         }
         String orderNo = UUID.randomUUID().toString().replace("-", "");
         orderDTO.setOrderNo(orderNo);
-        orderAction.createOrder(orderDTO,orderNo);
-        response.setStatus(RspStatusEnum.SUCCESS.getCode());
-        response.setMessage(RspStatusEnum.SUCCESS.getMessage());
+        response = itOrderService.createOrder(response, orderDTO);
         return response;
     };
 }

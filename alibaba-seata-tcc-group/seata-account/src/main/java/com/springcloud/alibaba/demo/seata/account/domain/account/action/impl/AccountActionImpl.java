@@ -41,7 +41,7 @@ public class AccountActionImpl implements AccountAction {
         long branchId = businessActionContext.getBranchId();
         String actionName = businessActionContext.getActionName();
         String userId = (String) businessActionContext.getActionContext("userId");
-        BigDecimal amount = (BigDecimal) businessActionContext.getActionContext("amount");
+        Integer amount = (Integer) businessActionContext.getActionContext("amount");
         log.info("账户服务本地事务回滚,actionName:{},xid:{},branchId:{},业务userId:{}",actionName,xid,branchId,userId);
         tAccountMapper.increaseAccount(userId,amount.doubleValue());
         return true;

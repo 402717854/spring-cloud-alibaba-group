@@ -1,5 +1,6 @@
 package com.springcloud.alibaba.demo.seata.business.interfaces.facade;
 
+import com.springcloud.alibaba.demo.seata.business.application.service.BusinessATService;
 import com.springcloud.alibaba.demo.seata.business.application.service.BusinessTccService;
 import com.springcloud.alibaba.demo.seata.common.dto.BusinessDTO;
 import com.springcloud.alibaba.demo.seata.common.response.ObjectResponse;
@@ -22,6 +23,8 @@ public class BusinessController {
 
     @Autowired
     private BusinessTccService businessTccService;
+    @Autowired
+    private BusinessATService businessATService;
 
     /**
      * 模拟用户购买商品下单业务逻辑流程
@@ -32,5 +35,10 @@ public class BusinessController {
     public ObjectResponse handleBusiness(@RequestBody BusinessDTO businessDTO){
         log.info("请求参数：{}",businessDTO.toString());
         return businessTccService.handleBusiness(businessDTO);
+    }
+    @PostMapping("/at/buy")
+    public ObjectResponse handleBusiness2(@RequestBody BusinessDTO businessDTO){
+        log.info("请求参数：{}",businessDTO.toString());
+        return businessATService.handleBusiness(businessDTO);
     }
 }

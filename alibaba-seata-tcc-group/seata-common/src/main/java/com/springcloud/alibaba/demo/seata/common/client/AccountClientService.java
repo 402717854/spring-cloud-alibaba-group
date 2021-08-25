@@ -20,4 +20,6 @@ public interface AccountClientService {
      */
     @PostMapping("/account/decrease/tcc")
     ObjectResponse decreaseAccountTcc(@RequestBody AccountDTO accountDTO);
+    @PostMapping("/account/decrease")
+    ObjectResponse decreaseAccount(@RequestBody AccountDTO accountDTO);
 }
