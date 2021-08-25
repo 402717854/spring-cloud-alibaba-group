@@ -11,7 +11,7 @@
         <module>rocketmq-stream-demo</module>
         <module>springcloud-alibaba-nacos</module>
         <module>alibaba-sentinel-group</module>
-        <module>alibaba-seata-group</module>
+        <module>alibaba-seata-tcc-group</module>
     </modules>
 
     <properties>
