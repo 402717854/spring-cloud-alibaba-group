@@ -5,6 +5,7 @@ import com.springcloud.alibaba.demo.seata.account.domain.account.service.ITAccou
 import com.springcloud.alibaba.demo.seata.common.dto.AccountDTO;
 import com.springcloud.alibaba.demo.seata.common.enums.RspStatusEnum;
 import com.springcloud.alibaba.demo.seata.common.response.ObjectResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
  * @since 2020/08/18
  */
 @Service
+@Slf4j
 public class TAccountServiceImpl implements ITAccountService {
 
     @Resource
@@ -43,6 +45,6 @@ public class TAccountServiceImpl implements ITAccountService {
     @Transactional(rollbackFor = {Throwable.class})
     public void testGlobalLock() {
         tAccountMapper.testGlobalLock("1");
-        System.out.println("Hi, i got lock, i will do some thing with holding this lock.");
+        log.info("Hi, i got lock, i will do some thing with holding this lock.");
     }
 }

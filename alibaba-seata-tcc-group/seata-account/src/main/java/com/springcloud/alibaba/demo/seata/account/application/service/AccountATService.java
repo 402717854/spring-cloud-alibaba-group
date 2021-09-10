@@ -21,6 +21,6 @@ public class AccountATService {
         log.info("AT账户服务入参:{}", JSON.toJSONString(accountDTO));
         ObjectResponse<Object> response= itAccountService.decreaseAccount(accountDTO);
         return response;
-    };
+    }
 
 }

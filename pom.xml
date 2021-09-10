@@ -12,6 +12,7 @@
         <module>springcloud-alibaba-nacos</module>
         <module>alibaba-sentinel-group</module>
         <module>alibaba-seata-tcc-group</module>
+        <module>nacos-test-api-demo</module>
     </modules>
 
     <properties>
