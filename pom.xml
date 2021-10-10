@@ -13,6 +13,7 @@
         <module>alibaba-sentinel-group</module>
         <module>alibaba-seata-tcc-group</module>
         <module>nacos-test-api-demo</module>
+        <module>gateway-group</module>
     </modules>
 
     <properties>
