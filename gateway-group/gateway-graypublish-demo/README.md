@@ -54,7 +54,7 @@ Gateway需要解决灰度发布的实际需求:
 
 
           主体思路：
-          a、扩展断言工厂HeaderUsernameRoutePredicateFactory，通过请求路径中header获取对应路由
+          a、扩展断言工厂HeaderUsernameRoutePredicateFactory，通过请求路径中header获取对应路由 Username:jack
           b、在路由配置中添加请求头的版本号信息  - AddRequestHeader=Version,v1
           c、在过滤器中将版本号传给负载均衡器，负载均衡器获取注册中心的服务列表，进行遍历，拿到服务的元数据version版本号，跟配置文件中的版本号进行对比获取相应的服务地址
           d、拿到服务地址进行调用

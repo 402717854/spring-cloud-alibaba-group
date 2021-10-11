@@ -16,6 +16,7 @@
         <module>gateway-nacos-demo</module>
         <module>gateway-graypublish-demo</module>
         <module>gateway-graypublish-demo2</module>
+        <module>gateway-auth-demo</module>
     </modules>
 
     <properties>
