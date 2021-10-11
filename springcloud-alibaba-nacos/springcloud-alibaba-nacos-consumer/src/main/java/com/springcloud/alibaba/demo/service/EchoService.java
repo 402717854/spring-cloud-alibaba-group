@@ -1,11 +1,12 @@
 package com.springcloud.alibaba.demo.service;
 
+import com.springcloud.alibaba.demo.config.FeignConfigure;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "nacos-provider")
+@FeignClient(name = "nacos-provider",fallback = EchoServiceFallback.class,configuration = FeignConfigure.class)
 public interface EchoService {
 
     @GetMapping("/echo/{str}")
