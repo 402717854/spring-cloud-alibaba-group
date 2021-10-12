@@ -1,0 +1,22 @@
+server:
+  port: 8888
+#指定fallbackcmd的超时时间
+hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
+spring:
+  application:
+    name: gateway-nacos-service
+  cloud:
+    # Spring Cloud Gateway 配置项，对应 GatewayProperties 类
+    gateway:
+      # 路由配置项，对应 RouteDefinition 数组
+      routes:
+        - id: yudaoyuanma # 路由的编号
+          uri: http://127.0.0.1:18181 # 路由到的目标地址
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/**
+          filters:
+            - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: fallbackcmd # 对应的 Hystrix Command 名字
+                fallbackUri: forward:/fallback # 处理 Hystrix fallback 的情况，重定向到指定地址
