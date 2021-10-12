@@ -17,6 +17,7 @@
         <module>gateway-graypublish-demo</module>
         <module>gateway-graypublish-demo2</module>
         <module>gateway-auth-demo</module>
+        <module>gateway-ratelimiter-demo</module>
     </modules>
 
     <properties>
