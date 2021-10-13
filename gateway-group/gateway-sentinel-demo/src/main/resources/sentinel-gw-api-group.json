@@ -1,0 +1,28 @@
+[
+  {
+    "apiName": "yudaoyuanma_customized_api",
+    "predicateItems": [
+      {
+        "pattern": "/categories/**",
+        "matchStrategy": 1
+      },
+      {
+        "pattern": "/SkyWalking/**",
+        "matchStrategy": 1
+      }
+    ]
+  },
+  {
+    "apiName": "gateway_test_api",
+    "predicateItems": [
+      {
+        "pattern": "/abc/**",
+        "matchStrategy": 1
+      },
+      {
+        "pattern": "/asd/**",
+        "matchStrategy": 1
+      }
+    ]
+  }
+]
