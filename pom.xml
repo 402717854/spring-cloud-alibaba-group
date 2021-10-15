@@ -14,6 +14,7 @@
         <module>alibaba-seata-tcc-group</module>
         <module>nacos-test-api-demo</module>
         <module>gateway-group</module>
+        <module>springcloud-ali-ribbon-group</module>
     </modules>
 
     <properties>

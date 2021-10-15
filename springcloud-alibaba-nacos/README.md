@@ -1,4 +1,4 @@
-# spring-cloud-alibaba-group
+##spring-cloud-alibaba-group
 ###nacos官方地址
     https://nacos.io/zh-cn/
 
@@ -8,6 +8,9 @@
     在nacos服务列表界面进行下线功能验证
     
     能够实现下线功能的正常使用(只是在服务列表中剔除该服务地址并不会真正让服务下线)
+
+###验证权重功能
+   nacos控制台设置权重为0，消费端不能访问服务提供端
 
 ###依赖版本的管理
     引入 Spring Boot、Spring Cloud、Spring Cloud Alibaba 三者 BOM 文件，进行依赖版本的管理，防止不兼容。
