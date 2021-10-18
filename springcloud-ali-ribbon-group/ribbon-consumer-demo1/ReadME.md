@@ -13,3 +13,22 @@
     默认情况下，Ribbon 采用 ZoneAvoidanceRule 规则。
     因为大多数公司是单机房，所以一般只有一个 zone，而 ZoneAvoidanceRule 在仅有一个 zone 的情况下，
     会退化成轮询的选择方式，所以会和 RoundRobinRule 规则类似。
+
+###自定义Ribbon配置
+   
+    配置文件方式:只能针对单个服务进行配置相关负载均衡
+    demo-provider:
+      ribbon:
+         NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡规则全类名
+    Spring JavaConfig 方式:可以配置单服务也可以配置默认
+    创建 RibbonConfiguration、DefaultRibbonClientConfiguration、UserProviderRibbonClientConfiguration 三个配置类，
+    实现 Ribbon 自定义配置
+    注意一：Spring Boot 项目默认扫描 DemoConsumerApplication 所在包以及子包下的所有 Bean 们。而 @Configuration 注解也是一种 Bean，也会被扫描到。
+          如果将 DefaultRibbonClientConfiguration 和 UserProviderRibbonClientConfiguration 放在 DemoConsumerApplication 所在包或子包中，
+          将会被 Spring Boot 所扫描到，导致整个项目的 Ribbon 客户端都使用相同的 Ribbon 配置，就无法到达 Ribbon 客户端级别的自定义配置的目的
+    注意二：为了避免多个 Ribbon 客户端级别的配置类创建的 Bean 之间互相冲突，Spring Cloud Netflix Ribbon 通过 SpringClientFactory 类，
+          为每一个 Ribbon 客户端创建一个 Spring 子上下文。
+          不过这里要注意，因为 DefaultRibbonClientConfiguration 和 UserProviderRibbonClientConfiguration 都创建了 IRule Bean，
+          而 DefaultRibbonClientConfiguration 是在 Spring 父上下文生效，会和 UserProviderRibbonClientConfiguration 所在的 Spring 子上下文共享。
+          这样就导致从 Spring 获取 IRule Bean 时，存在两个而不知道选择哪一个。
+          因此，我们声明 UserProviderRibbonClientConfiguration 创建的 IRule Bean 为 @Primary，优先使用它。
