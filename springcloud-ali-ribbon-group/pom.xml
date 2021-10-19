@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>ribbon-consumer-demo1</module>
+        <module>ribbon-consumer-demo2</module>
     </modules>
 
     <properties>

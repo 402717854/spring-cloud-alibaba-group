@@ -14,3 +14,11 @@
             server.tomcat.threads.max=2
             #最小工作线程数 默认值10
             server.tomcat.threads.min-spare=2
+
+
+###连接获取超时Timeout waiting for connection from pool 
+         feign.httpclient.max-connections  整个连接池的总数量大小
+         feign.httpclient.max-connections-per-route某一个服务每次能并行接收的请求数量
+        服务1要通过Fluent调用服务2的接口。服务1发送了400个请求，但由于Fluent默认只支持maxPerRoute=100，MaxTotal=200，比如接口执行时间为500ms，
+        由于maxPerRoute=100，所以要分为100,100,100,100分四批来执行，
+        全部执行完成需要2000ms。而如果maxPerRoute设置为400，全部执行完需要500ms。在这种情况下（提供并发能力时）就要对这两个参数进行设置了。

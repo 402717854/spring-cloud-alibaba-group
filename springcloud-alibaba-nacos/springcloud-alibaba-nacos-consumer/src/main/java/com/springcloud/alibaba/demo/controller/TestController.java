@@ -46,5 +46,18 @@ public class TestController {
     public Object services() {
         return discoveryClient.getServices();
     }
-
+    @GetMapping("/divide-feign3")
+    public String divide2(@RequestParam Integer a, @RequestParam Integer b) {
+        for (int i = 0; i < 100; i++) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    String divide = echoService.divide(a, b);
+                    System.out.println(divide);
+                }
+            };
+            thread.start();
+        }
+        return "请求完成";
+    }
 }
