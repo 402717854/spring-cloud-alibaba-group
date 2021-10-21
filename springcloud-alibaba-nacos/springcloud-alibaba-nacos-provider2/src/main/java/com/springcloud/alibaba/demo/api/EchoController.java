@@ -42,7 +42,7 @@ public class EchoController {
     public String divide(@RequestParam Integer a, @RequestParam Integer b) {
         log.info("8082服务调用");
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(10000L);
         }
         catch (InterruptedException e) {
             e.printStackTrace();

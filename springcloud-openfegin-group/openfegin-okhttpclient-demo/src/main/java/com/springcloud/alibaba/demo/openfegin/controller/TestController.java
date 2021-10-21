@@ -1,6 +1,6 @@
-package com.springcloud.alibaba.demo.controller;
+package com.springcloud.alibaba.demo.openfegin.controller;
 
-import com.springcloud.alibaba.demo.service.EchoService;
+import com.springcloud.alibaba.demo.openfegin.service.EchoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +48,7 @@ public class TestController {
     }
     @GetMapping("/divide-feign3")
     public String divide2(@RequestParam Integer a, @RequestParam Integer b) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springcloud-ali-ribbon-group</artifactId>
+    <artifactId>springcloud-ribbon-group</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>ribbon-consumer-demo1</module>
