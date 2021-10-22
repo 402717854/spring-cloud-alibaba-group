@@ -17,6 +17,8 @@
 
 
 ###连接获取超时Timeout waiting for connection from pool 
+         主要关系是:RequestConfig.connectionRequestTimeout 从连接池中获取连接的超时时间，超过该时间未拿到可用连接
+         与以下配置有一定关系
          feign.httpclient.max-connections  整个连接池的总数量大小
          feign.httpclient.max-connections-per-route某一个服务每次能并行接收的请求数量
         服务1要通过Fluent调用服务2的接口。服务1发送了400个请求，但由于Fluent默认只支持maxPerRoute=100，MaxTotal=200，比如接口执行时间为500ms，

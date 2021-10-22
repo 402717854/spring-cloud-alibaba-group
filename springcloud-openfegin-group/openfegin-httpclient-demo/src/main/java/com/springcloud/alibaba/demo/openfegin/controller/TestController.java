@@ -1,12 +1,18 @@
 package com.springcloud.alibaba.demo.openfegin.controller;
 
 import com.springcloud.alibaba.demo.openfegin.service.EchoService;
+import com.springcloud.alibaba.demo.openfegin.utils.HttpUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 @RestController
 public class TestController {
@@ -63,5 +69,11 @@ public class TestController {
             thread.start();
         }
         return "请求完成";
+    }
+    @GetMapping("/divide-http")
+    public String divide4(@RequestParam Integer a, @RequestParam Integer b) {
+        String URL = "http://192.168.43.5:8082/divide?a="+a+"&b="+b;
+        String result = HttpUtils.httpGet(URL, null);
+        return result;
     }
 }
