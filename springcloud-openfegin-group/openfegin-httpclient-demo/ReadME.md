@@ -24,7 +24,7 @@
                         connect-timeout: 5000 #请求的连接超时时长，单位：毫秒。默认为 10 * 1000 毫秒
         自定义配置项HttpClientConfig替换官方默认HttpClientFeignConfiguration配置项
         原因：官方默认的配置项不能满足生产要求
-####fegin默认重试次数为0
+####fegin默认重试次数为0  推介使用ribbon重试策略配置
        
          自定义重试配置方式FeignConfigure
 

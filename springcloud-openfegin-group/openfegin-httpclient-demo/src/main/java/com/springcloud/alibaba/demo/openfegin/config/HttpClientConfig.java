@@ -17,6 +17,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHeaderElementIterator;
 import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,6 +27,9 @@ import org.springframework.cloud.commons.httpclient.ApacheHttpClientFactory;
 import org.springframework.cloud.openfeign.ribbon.FeignRibbonClientAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,12 +122,22 @@ public class HttpClientConfig {
         return httpClient;
     }
 
+    @Bean
+    public RestTemplate restTemplate(@Qualifier("clientHttpRequestFactory") ClientHttpRequestFactory clientHttpRequestFactory) {
+        return new RestTemplate(clientHttpRequestFactory);
+    }
+
+    @Bean(name = "clientHttpRequestFactory")
+    public ClientHttpRequestFactory clientHttpRequestFactory() {
+        return new HttpComponentsClientHttpRequestFactory(httpClient);
+    }
+
     /**
      * 配置长连接保持策略
      *
      * @return
      */
-    public ConnectionKeepAliveStrategy keepAliveStrategy(HttpClientProperties httpClientProperties) {
+    private ConnectionKeepAliveStrategy keepAliveStrategy(HttpClientProperties httpClientProperties) {
         return (response, context) -> {
             HeaderElementIterator it = new BasicHeaderElementIterator(
                     response.headerIterator(HTTP.CONN_KEEP_ALIVE));
