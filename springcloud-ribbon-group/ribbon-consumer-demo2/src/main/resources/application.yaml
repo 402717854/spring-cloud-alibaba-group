@@ -17,7 +17,3 @@ nacos-provider:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡规则全类名
     NFLoadBalancerRuleClassName: com.springcloud.alibaba.demo.loadbalance.VersionRoundRobbinRule
     Version: 1.0.0
-ribbon:
-  eager-load:
-    enabled: true #是否开启饥饿加载。默认为 false 不开启
-    clients: nacos-provider # 开启饥饿加载的 Ribbon 客户端名字。如果有多个，使用 , 逗号分隔。

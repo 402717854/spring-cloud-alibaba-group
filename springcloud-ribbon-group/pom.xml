@@ -14,6 +14,7 @@
     <modules>
         <module>ribbon-consumer-demo1</module>
         <module>ribbon-consumer-demo2</module>
+        <module>ribbon-consumer-demo3</module>
     </modules>
 
     <properties>

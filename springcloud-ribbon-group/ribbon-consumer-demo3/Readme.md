@@ -1,0 +1,35 @@
+###开启饥饿加载
+    ribbon:
+    eager-load:
+    enabled: true #是否开启饥饿加载。默认为 false 不开启
+    clients: nacos-provider # 开启饥饿加载的 Ribbon 客户端名字。如果有多个，使用 , 逗号分隔。
+###客户端使用配置
+    ribbon:
+    #  #默认使用httpclient   配置类RibbonClientConfiguration
+    #  okhttp:
+    #    enabled: true #设置使用 OkHttp，对应 OkHttpRibbonConfiguration 配置类 配置不起作用(另作研究)
+    #  http:
+    #    client:
+    #      enabled: true # 设置使用 Apache HttpClient，对应 HttpClientRibbonConfiguration 配置类 CloseableHttpClient.execute
+    restclient:
+    enabled: true # 设置使用 Jersey Client，对应 RestClientRibbonConfiguration 配置类 RestClient.execute==>CloseableHttpClient.execute
+
+###重试配置超时配置
+     #客户端级别的自定义配置  配置类DefaultClientConfigImpl  在设置ribbon.http.client.enabled:true配置之后才会生效
+    nacos-provider:
+    ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule # 负载均衡规则全类名
+    ConnectTimeout: 10000 # 请求的连接超时时间，单位：毫秒。默认为 1000
+    ReadTimeout: 1000 # 请求的读取超时时间，单位：毫秒。默认为 1000
+    OkToRetryOnAllOperations: true # 是否对所有操作都进行重试，默认为 false。
+    MaxAutoRetries: 1 # 对当前服务的重试次数，默认为 0 次。
+    MaxAutoRetriesNextServer: 1 # 重新选择服务实例的次数，默认为 1 次。注意，不包含第 1 次哈。
+    #全局级别配置
+    ribbon:
+    #  #全局配置重试机制
+    #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule # 负载均衡规则全类名
+    #  ConnectTimeout: 1000 # 请求的连接超时时间，单位：毫秒。默认为 1000
+    #  ReadTimeout: 1000 # 请求的读取超时时间，单位：毫秒。默认为 1000
+    #  OkToRetryOnAllOperations: true # 是否对所有操作都进行重试，默认为 false。
+    #  MaxAutoRetries: 1 # 对当前服务的重试次数，默认为 0 次。
+    #  MaxAutoRetriesNextServer: 1 # 重新选择服务实例的次数，默认为 1 次。注意，不包含第 1 次哈。

@@ -48,6 +48,12 @@ public class EchoController {
     @GetMapping("/divide")
     public String divide(@RequestParam Integer a, @RequestParam Integer b) {
         log.info("8081服务调用");
+        try {
+            Thread.sleep(10000L);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return String.valueOf(a / b);
     }
 

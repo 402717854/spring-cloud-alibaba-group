@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ribbon-demo1</artifactId>
+    <artifactId>ribbon-consumer-demo1</artifactId>
 
     <dependencies>
         <!-- 引入 SpringMVC 相关依赖，并实现对其的自动配置 -->
@@ -17,7 +17,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
         <!-- 引入 Spring Cloud Alibaba Nacos Discovery 相关依赖，将 Nacos 作为注册中心，并实现对其的自动配置 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

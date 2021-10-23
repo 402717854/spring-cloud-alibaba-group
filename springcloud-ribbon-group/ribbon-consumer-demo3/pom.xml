@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ribbon-consumer-demo2</artifactId>
+    <artifactId>ribbon-consumer-demo3</artifactId>
 
     <dependencies>
         <!-- 引入 SpringMVC 相关依赖，并实现对其的自动配置 -->
