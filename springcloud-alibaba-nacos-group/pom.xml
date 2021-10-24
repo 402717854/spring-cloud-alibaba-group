@@ -9,13 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springcloud-alibaba-nacos</artifactId>
+    <artifactId>springcloud-alibaba-nacos-group</artifactId>
     <packaging>pom</packaging>
 
     <modules>
         <module>springcloud-alibaba-nacos-consumer</module>
         <module>springcloud-alibaba-nacos-provider</module>
         <module>springcloud-alibaba-nacos-provider2</module>
+        <module>springcloud-alibaba-nacos-config-demo</module>
     </modules>
 
     <properties>
