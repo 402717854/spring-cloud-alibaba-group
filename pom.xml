@@ -15,6 +15,7 @@
         <module>gateway-group</module>
         <module>springcloud-ribbon-group</module>
         <module>springcloud-openfegin-group</module>
+        <module>springcloud-hystrix-group</module>
     </modules>
 
     <properties>
