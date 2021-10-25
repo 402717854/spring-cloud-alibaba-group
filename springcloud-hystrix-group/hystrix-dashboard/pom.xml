@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hystrix-consumer-demo1</artifactId>
+    <artifactId>hystrix-dashboard</artifactId>
 
     <dependencies>
         <!-- 引入 SpringMVC 相关依赖，并实现对其的自动配置 -->
@@ -18,18 +18,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 引入 Spring Cloud Netflix Hystrix 相关依赖，将 Hystrix 作为服务保障组件，并实现对其的自动配置 -->
+        <!-- 实现对 Hystrix Dashboard 的自动配置 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
-        <!-- 实现对 Actuator 的自动化配置 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -53,5 +47,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserServiceDemoApplication {
+public class HystrixUserServiceDemoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceDemoApplication.class, args);
+        SpringApplication.run(HystrixUserServiceDemoApplication.class, args);
     }
 }

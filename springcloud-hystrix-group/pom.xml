@@ -12,8 +12,9 @@
     <artifactId>springcloud-hystrix-group</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>user-service-demo</module>
+        <module>hystrix-user-service-demo</module>
         <module>hystrix-consumer-demo1</module>
+        <module>hystrix-dashboard</module>
     </modules>
 
     <properties>
