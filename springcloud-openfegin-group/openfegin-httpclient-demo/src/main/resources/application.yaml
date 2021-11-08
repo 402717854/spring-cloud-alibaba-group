@@ -18,7 +18,7 @@ feign:
     enabled: true
     max-connections: 200 #最大连接数 默认值200
     max-connections-per-route: 10 #最大路由 默认值50
-    connectionRequestTimeout: 15000
+    connectionRequestTimeout: 15000  #等待连接池超时时间
   #不配置会拿RibbonClientConfiguration。ribbonClientConfig()默认值
   #不配置feign默认配置会进行get请求会重试，默认定义
   client:

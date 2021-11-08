@@ -29,6 +29,12 @@ public class Demo01Consumer {
     @StreamListener(MySink.TREK_INPUT)
     public void onTrekMessage(@Payload Demo01Message message) {
         logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        logger.info("[onMessage][线程编号:{} 消费消息完毕]", Thread.currentThread().getId());
     }
 
     @ServiceActivator(inputChannel = "ERBADAGANG-TOPIC-01.erbadagang-consumer-group-ERBADAGANG-TOPIC-01.errors")

@@ -77,4 +77,8 @@ public class Demo01Controller {
         return true;
     }
 
+    public static void main(String[] args) {
+        int i = new Random().nextInt();
+        System.out.println(i);
+    }
 }
