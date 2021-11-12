@@ -30,7 +30,7 @@ public class Demo01Consumer {
     public void onTrekMessage(@Payload Demo01Message message) {
         logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(20000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
