@@ -13,8 +13,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>hystrix-user-service-demo</module>
+        <module>hystrix-user-service-demo2</module>
         <module>hystrix-consumer-demo1</module>
+        <module>hystrix-consumer-demo2</module>
         <module>hystrix-dashboard</module>
+        <module>hystrix-turbine-dashboard</module>
+        <module>hystrix-openfegin-consumer</module>
+        <module>hystrix-ribbon-consumer</module>
     </modules>
 
     <properties>

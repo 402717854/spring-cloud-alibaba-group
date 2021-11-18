@@ -11,7 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 
 @RestController
-public class TestController {
+public class
+TestController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired

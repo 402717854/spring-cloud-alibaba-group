@@ -1,0 +1,62 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: hystrix-ribbon-demo
+#HystrixCommandProperties
+hystrix:
+  threadpool:
+    default:
+      coreSize: 10 #设置执行命令线程池的核心线程数,命令执行的最大并发量
+      maxQueueSize: 50 #设置线程池的最大队列大小，设置为-1时采用SynchronousQueue实现的队列，否则使用LinkedBlockingQueue
+      queueSizeRejectionThreshold: 45 #为队列设置拒绝阈值，队列没有达到最大值也能拒绝请求。仅对LinkedBlockingQueue有效
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000 #该属性用来设置滚动时间窗的长度，单位为毫秒  用于线程池的指标度量,分成多个桶来统计指标
+          numBuckets: 10 #滚动时间窗统计指标信息时划分“桶”的数量
+  command:
+    default:
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000 #该属性用来设置滚动时间窗的长度，单位为毫秒
+          numBuckets: 10 #滚动时间窗统计指标信息时划分“桶”的数量
+        rollingPercentile:
+          enable: true #对命令执行的延迟是否使用百分位数来跟踪和计算
+          timeInMilliseconds: 60000 #用来设置百分位统计的滚动窗口的持续时间
+          numBuckets: 6 #用来设置百分位统计的滚动窗口中使用“桶”的数量
+          bucketSize: 100 #用来设置在执行过程中每个“桶”中保留的最大执行次数
+        healthSnapshot:
+          intervalInMilliseconds: 500 #该属性用来设置采集影响断路器状态的健康快照（请求的成功、错误百分比）的间隔等待时间
+      execution:
+        isolation:
+          timeout:
+            enabled: true #用来执行HystrixCommand.run()执行是否启用超时时间
+          strategy: THREAD #默认通过线程池隔离的策略   SEMAPHORE:通过信号量隔离的策略
+          thread:
+            #如果ribbon中配置了重试机制，那么建议hystrix的超时时间为
+            #(1 + MaxAutoRetries + MaxAutoRetriesNextServer) * ReadTimeout 避免在重试完成前被hystrix熔断了
+            timeoutInMilliseconds: 8000  #全局默认1000ms  HystrixCommand执行的超时时间(连接超时时间2000ms)
+            interruptOnTimeOut: true #用来配置HystrixCommand.run()执行超时的时候是否要将它中断
+            interruptOnCancel: true  #用来配置HystrixCommand.run()执行取消的时候是否要将它中断
+#          semaphore:
+#            maxConcurrentRequests: 10 #当HystrixCommand的隔离策略使用信号量的时候，该属性用来配置信号量的大小（并发请求数）。当最大并发请求数达到该设置值时，后续的请求将会被拒绝。
+      fallback:
+        enable: true  #服务降级策略是否启用
+        isolation:
+          semaphore:
+            #该配置用来设置从调用线程中允许HystrixCommand.getFallback()方法执行的最大并发请求书。当达到最大并发请求数时，后续的请求将会被拒绝并抛出异常。
+            maxConcurrentRequests: 10
+      circuitBreaker:
+        enable: true #该属性用来确定当服务请求命令失败时，是否使用断路器来跟踪其健康指标和熔断请求
+        #该属性用来设置在滚动时间窗中，断路器熔断的最小请求数
+        requestVolumeThreshold: 2
+        #该属性用来设置当断路器打开之后的休眠时间窗。休眠时间窗结束之后，会将断路器置为“半开”状态，尝试熔断的请求命令，如果依然失败就
+        #将断路器继续设置为“打开”状态，如果成功就设置为“关闭”状态。
+        sleepWindowInMilliseconds: 5000
+        #该属性用来设置断路器打开的错误百分比条件
+        #在滚动时间窗口内,在请求数量超过requestVolumeThreshold阈值的前提下，如果错误请求数的百分比超过50，就把断路器设置为“打开”状态
+        errorThresholdPercentage: 50
+        #设置为true,断路器强制进入打开状态，会拒绝所有请求
+        forceOpen: false
+        #设置为true,断路器强制进入关闭状态，会接收所有请求
+        forceClosed: falese

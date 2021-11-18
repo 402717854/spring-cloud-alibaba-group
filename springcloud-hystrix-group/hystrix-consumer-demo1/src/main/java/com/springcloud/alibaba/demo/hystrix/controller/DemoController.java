@@ -26,7 +26,12 @@ public class DemoController {
         logger.info("[getUser][准备调用 user-service 获取用户({})详情]", id);
         return restTemplate.getForEntity("http://127.0.0.1:8083/user/get?id=" + id, String.class).getBody();
     }
-
+    @GetMapping("/get_user2")
+    @HystrixCommand(fallbackMethod = "getUserFallback")
+    public String getUser2(@RequestParam("id") Integer id) {
+        logger.info("[getUser2][准备调用 user-service 获取用户({})详情]", id);
+        return restTemplate.getForEntity("http://hystrix-user-service/user/get?id=" + id, String.class).getBody();
+    }
     public String getUserFallback(Integer id, Throwable throwable) {
         logger.info("[getUserFallback][id({}) exception({})]", id, ExceptionUtils.getRootCauseMessage(throwable));
         return "mock:User:" + id;

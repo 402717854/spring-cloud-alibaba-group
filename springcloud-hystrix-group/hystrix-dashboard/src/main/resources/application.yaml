@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 9091
 hystrix:
   dashboard:
     proxy-stream-allow-list: "127.0.0.1"
