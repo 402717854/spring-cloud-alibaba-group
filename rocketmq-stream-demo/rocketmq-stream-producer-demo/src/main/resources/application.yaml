@@ -23,7 +23,7 @@ spring:
             # RocketMQ Producer 配置项，对应 RocketMQProducerProperties 类
             producer:
               group: stream-producer-test-group # 生产者分组
-              sync: false # 是否同步发送消息，默认为 false 异步。
+              sync: true # 是否同步发送消息，默认为 false 异步。
               retryTimesWhenSendAsyncFailed: 0  #异步模式下发送消息失败的重试次数
               compressMessageBodyThreshold: 4096 #压缩消息体
 

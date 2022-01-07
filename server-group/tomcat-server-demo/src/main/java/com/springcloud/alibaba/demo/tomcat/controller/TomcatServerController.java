@@ -11,6 +11,7 @@ public class TomcatServerController {
     public String test(){
         String str="欢迎测试tomcatServer吞吐量";
         try {
+            byte[] bytes=new byte[512*1024];
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -98,7 +98,7 @@ ribbon:
 hystrix-user-service:
   ribbon:
     listOfServers: 127.0.0.1:8083,127.0.0.1:8084
-    NFLoadBalancerRuleClassName: com.springcloud.alibaba.demo.hystrix.ribbon.rule.HighAvailabilityServerRule # 负载均衡规则全类名
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule # 负载均衡规则全类名
     OkToRetryOnAllOperations: true # 是否对所有操作都进行重试，默认为 false。
     MaxAutoRetries: 0 # 对当前服务的重试次数，默认为 0 次。
     MaxAutoRetriesNextServer: 1 # 重新选择服务实例的次数，默认为 1 次。注意，不包含第 1 次

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "order")
-// @NacosConfigurationProperties(prefix = "order", dataId = "${nacos.config.data-id}", type = ConfigType.YAML)
 public class OrderProperties {
     /**
      * 订单支付超时时长，单位：秒。
