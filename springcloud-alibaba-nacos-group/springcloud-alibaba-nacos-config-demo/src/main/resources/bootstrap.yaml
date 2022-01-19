@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: springcloud-alibaba-nacos-config-demo
+  profiles:
+    active: dev

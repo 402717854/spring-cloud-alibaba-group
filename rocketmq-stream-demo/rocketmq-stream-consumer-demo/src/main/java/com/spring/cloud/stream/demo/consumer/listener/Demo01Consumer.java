@@ -23,12 +23,18 @@ public class Demo01Consumer {
     public void onMessage(@Payload Demo01Message message) {
         logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), JSON.toJSON(message));
         // <1> 注意，此处抛出一个 RuntimeException 异常，模拟消费失败
-        throw new RuntimeException("我就是故意抛出一个异常");
+//        throw new RuntimeException("我就是故意抛出一个异常");
     }
 
     @StreamListener(MySink.TREK_INPUT)
     public void onTrekMessage(@Payload Demo01Message message) {
         logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+//        try {
+//            Thread.sleep(20000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        logger.info("[onMessage][线程编号:{} 消费消息完毕]", Thread.currentThread().getId());
     }
 
     @ServiceActivator(inputChannel = "ERBADAGANG-TOPIC-01.erbadagang-consumer-group-ERBADAGANG-TOPIC-01.errors")

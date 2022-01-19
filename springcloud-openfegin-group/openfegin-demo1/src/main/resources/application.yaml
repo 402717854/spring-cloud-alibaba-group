@@ -1,0 +1,49 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: openfegin-httpclient-demo
+  cloud:
+    nacos:
+      discovery:
+        namespace: 9739d612-297a-4a7c-b098-6090edf88dea
+        server-addr: 192.168.66.9:8848
+        fail-fast: true
+        register-enabled: false
+        group: ALI-TEST-SERVICE-GROUP
+  main:
+    allow-bean-definition-overriding: true
+feign:
+  #不配置会拿RibbonClientConfiguration。ribbonClientConfig()默认值
+  #不配置feign默认配置会进行get请求会重试，默认定义 FeignClientConfiguration 配置属性类
+  client:
+    config:
+      # 全局级别配置
+      default:
+        read-timeout: 60000 #请求的读取超时时长，单位：毫秒。默认为 60 * 1000 毫秒 服务器返回数据(response)的时间，超过该时间抛出read timeout
+        connect-timeout: 5000 #请求的连接超时时长，单位：毫秒。默认为 10 * 1000 毫秒 连接上服务器(握手成功)的时间，超出该时间抛出connect timeout
+        logger-level: BASIC
+      #客户端级别配置
+      nacos-provider:
+        logger-level: FULL
+  compression:
+    request:
+      enabled: true #发送数据压缩
+      min-request-size: 2048 #默认配置
+      mime-types: text/xml,application/xml,application/json #默认配置
+    response:
+      enabled: true
+      useGzipDecoder: true
+#Feign 和 Ribbon 都有请求重试的功能，两者都启用该功能的话，会产生冲突的问题。
+#推荐的是使用 Ribbon 来提供重试
+ribbon:
+  eager-load:
+    enabled: true
+  ConnectTimeout: 1000 # 请求的连接超时时间，单位：毫秒。默认为 1000
+  ReadTimeout: 1 # 请求的读取超时时间，单位：毫秒。默认为 1000
+  OkToRetryOnAllOperations: true # 是否对所有操作都进行重试，默认为 false。
+  MaxAutoRetries: 0 # 对当前服务的重试次数，默认为 0 次。
+  MaxAutoRetriesNextServer: 1 # 重新选择服务实例的次数，默认为 1 次。注意，不包含第 1 次哈
+logging:
+  level:
+    com.springcloud.alibaba.demo.openfegin.service: DEBUG

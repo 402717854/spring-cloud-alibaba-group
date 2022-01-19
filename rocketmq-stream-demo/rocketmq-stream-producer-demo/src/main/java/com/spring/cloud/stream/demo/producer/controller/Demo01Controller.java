@@ -25,11 +25,12 @@ public class Demo01Controller {
 
     @GetMapping("/send")
     public boolean send() {
+        System.out.println("开始时间:"+System.currentTimeMillis());
         // <2>创建 Message
         Demo01Message message=new Demo01Message();
         message.setId(new Random().nextInt());
         // <3>创建 Spring Message 对象
-        Message<Demo01Message> springMessage = MessageBuilder.withPayload(message).build();
+        Message<Demo01Message> springMessage = MessageBuilder.withPayload(message).setHeader(MessageConst.PROPERTY_DELAY_TIME_LEVEL,7).build();
         // <4>发送消息
         return mySource.erbadagangOutput().send(springMessage);
     }
@@ -53,7 +54,7 @@ public class Demo01Controller {
         message.setId(new Random().nextInt());
         // 创建 Spring Message 对象
         Message<Demo01Message> springMessage = MessageBuilder.withPayload(message)
-                .setHeader(MessageConst.PROPERTY_DELAY_TIME_LEVEL, "3") // 设置延迟级别为 3，10 秒后消费。
+                .setHeader(MessageConst.PROPERTY_DELAY_TIME_LEVEL, 6) // 设置延迟级别为 3，10 秒后消费。
                 .build();
         // 发送消息
         boolean sendResult = mySource.erbadagangOutput().send(springMessage);
@@ -77,4 +78,8 @@ public class Demo01Controller {
         return true;
     }
 
+    public static void main(String[] args) {
+        int i = new Random().nextInt();
+        System.out.println(i);
+    }
 }

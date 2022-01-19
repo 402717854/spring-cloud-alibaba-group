@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: gateway-nacos-service
+  cloud:
+    # Spring Cloud Gateway 配置项，对应 GatewayProperties 类
+    gateway:
+      # 路由配置项，对应 RouteDefinition 数组
+      routes:
+        - id: ReactiveCompositeDiscoveryClient_nacos-provider # 路由的编号
+          uri: grayLb://nacos-provider # 路由到的目标地址
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/nacos-provider/**
+            - Weight=nacos-provider,90
+          filters:
+            - RewritePath=/nacos-provider/(?<remaining>.*), /${remaining} # 将 /nacos-provider 前缀剔除
+            - AddRequestHeader=Version,v1
+        - id: ReactiveCompositeDiscoveryClient_nacos-provider2 # 路由的编号
+          uri: grayLb://nacos-provider # 路由到的目标地址
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/nacos-provider/**
+            - Weight=nacos-provider,10
+          filters:
+            - RewritePath=/nacos-provider/(?<remaining>.*), /${remaining} # 将 /nacos-provider 前缀剔除
+            - AddRequestHeader=Version,v2
+    # Nacos 作为注册中心的配置项
+    nacos:
+      discovery:
+        server-addr: 192.168.66.9:8848 # Nacos 服务器地址

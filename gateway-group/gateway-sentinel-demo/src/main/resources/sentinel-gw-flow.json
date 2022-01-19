@@ -1,0 +1,12 @@
+[
+  {
+    "resource": "yudaoyuanma",
+    "count": 3
+  },
+  {
+    "resource": "yudaoyuanma_customized_api",
+    "count": 2,
+    "controlBehavior": 0,
+    "maxQueueingTimeoutMs": 1000
+  }
+]

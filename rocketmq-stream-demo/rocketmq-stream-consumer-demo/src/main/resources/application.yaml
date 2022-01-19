@@ -10,11 +10,16 @@ spring:
           destination: ERBADAGANG-TOPIC-01 # 目的地。这里使用 RocketMQ Topic
           content-type: application/json # 内容格式。这里使用 JSON
           group: erbadagang-consumer-group-ERBADAGANG-TOPIC-01 # 消费者分组,命名规则：组名+topic名
-
+          consumer:
+            concurrency: 10   #输入通道消费者的并发数
+            maxAttempts: 1    #重试次数
         trek-input:
           destination: TREK-TOPIC-01 # 目的地。这里使用 RocketMQ Topic
           content-type: application/json # 内容格式。这里使用 JSON
           group: trek-consumer-group-TREK-TOPIC-01 # 消费者分组,命名规则：组名+topic名
+          consumer:
+            concurrency: 10   #输入通道消费者的并发数
+            maxAttempts: 1    #重试次数
       # Spring Cloud Stream RocketMQ 配置项
       rocketmq:
         # RocketMQ Binder 配置项，对应 RocketMQBinderConfigurationProperties 类
@@ -28,6 +33,8 @@ spring:
               enabled: true # 是否开启消费，默认为 true
               broadcasting: false # 是否使用广播消费，默认为 false 使用集群消费，如果要使用广播消费值设成true。
               delay-level-when-next-consume: 0 # 异步消费消息模式下消费失败重试策略，默认为 0
-
+          trek-input:
+            consumer:
+              enabled: true # 是否开启消费，默认为 true
 server:
   port: ${random.int[10000,19999]} # 随机端口，方便启动多个消费者
